@@ -2,6 +2,7 @@ package com.example.dam_weather;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.dam_weather.database.WeatherDB;
 import com.example.dam_weather.database.WeatherDatabaseHelper;
 import com.example.dam_weather.models.ModelWeather;
+import com.example.dam_weather.notifications.NotificationHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -31,6 +33,8 @@ import java.net.URL;
 public class MainFt1Activity extends AppCompatActivity {
 
     private WeatherDatabaseHelper dbHelper;
+    private NotificationHandler handler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class MainFt1Activity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         TextView fecha = (TextView) findViewById(R.id.Fecha);
         dbHelper = new WeatherDatabaseHelper(this);
+        handler = new NotificationHandler(this);
 
 
         city.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +65,22 @@ public class MainFt1Activity extends AppCompatActivity {
                                     Picasso.get().load("http:".concat(response.getJSONObject("current").getJSONObject("condition").getString("icon"))).into(icon);
                                     String date = response.getJSONObject("current").getString("last_updated");
                                     fecha.setText("Medición " + date);
+                                    int air_quality = response.getJSONObject("current").getJSONObject("air_quality").getInt("us-epa-index");
+                                    if(air_quality >= 3) {
+                                        //alerta de calidad de aire -- se lanza notificacion
+                                        String titleString = "Alerta de Calidad del Aire";
+                                        String msgString = "";
+                                        switch(air_quality) {
+                                            case 3: msgString = "La calidad del aire de la localidad de " +  city.getText().toString() + " es insaluble para los grupos sensitivos (asma, alergias,enfermedades respiratorias, ...)"; break;
+                                            case 4: msgString = "La calidad del aire de la localidad de " +  city.getText().toString() + " es dañina para todo el mundo, se debe evitar cualquier tipo de actividad fisica en el aire libre"; break;
+                                            case 5: msgString = "La calidad del aire de la localidad de " +  city.getText().toString() + " es muy dañina para todo el mundo, todo el mundo especialmente los niños y personas mayores, deben limitar la actividad en el exterior"; break;
+                                            case 6: msgString = "La calidad del aire de la localidad de " +  city.getText().toString() + " es peligrosa, alerta sanitaria de emergencia. Toda la población se ve afectada"; break;
+
+                                        }
+                                        Notification.Builder nBuilder = handler.createNotification(titleString, msgString, false);
+                                        handler.getManager().notify(1,nBuilder.build());
+
+                                    }
                                     //ModelWeather p = new ModelWeather(city.getText().toString(),response.getJSONObject("current").getJSONObject("condition").getString("icon"),temperature,date);
                                     //añadir datos a  la db
                                     /*

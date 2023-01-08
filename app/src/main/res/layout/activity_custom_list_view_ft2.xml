@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomListViewFt2">
+
+    <ImageView
+        android:id="@+id/iconImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <LinearLayout
+        android:layout_width="311dp"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/t_max"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/t_min"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/precipitacion"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/vel_viento"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="TextView" />
+    </LinearLayout>
+
+
+</LinearLayout>

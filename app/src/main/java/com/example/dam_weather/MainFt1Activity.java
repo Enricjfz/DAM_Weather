@@ -68,7 +68,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                     int air_quality = response.getJSONObject("current").getJSONObject("air_quality").getInt("us-epa-index");
                                     if(air_quality >= 3) {
                                         //alerta de calidad de aire -- se lanza notificacion
-                                        String titleString = "Alerta de Calidad del Aire";
+                                        String titleString = "Alerta de Calidad del Aire de Nivel " + air_quality;
                                         String msgString = "";
                                         switch(air_quality) {
                                             case 3: msgString = "La calidad del aire de la localidad de " +  city.getText().toString() + " es insaluble para los grupos sensitivos (asma, alergias,enfermedades respiratorias, ...)"; break;

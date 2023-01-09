@@ -49,7 +49,7 @@ public class NotificationHandler extends ContextWrapper {
         return  new Notification.Builder(getApplicationContext(), channel)
                 .setContentTitle(title)
                 .setContentText(msg)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true);
     }
 
@@ -57,7 +57,7 @@ public class NotificationHandler extends ContextWrapper {
         return new Notification.Builder(getApplicationContext())
                 .setContentTitle(title)
                 .setContentText(msg)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true);
     }
 

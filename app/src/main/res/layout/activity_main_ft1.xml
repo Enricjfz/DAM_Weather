@@ -22,17 +22,19 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="139dp"
+        android:layout_height="118dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="136dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/editTextCity"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="241dp"
-        android:layout_height="150dp"
+        android:layout_height="250dp"
         android:layout_marginBottom="80dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/editTextCity"
@@ -42,17 +44,29 @@
             android:id="@+id/Fecha"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="12sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/idTemperatura"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="175dp"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="52dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="48sp"
+            android:visibility="invisible" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/nombreCiudad_ft1"
+        android:layout_width="139dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/icon"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

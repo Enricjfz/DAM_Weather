@@ -34,6 +34,7 @@ public class MainFt1Activity extends AppCompatActivity {
 
     private WeatherDatabaseHelper dbHelper;
     private NotificationHandler handler;
+    private TextView txCity;
 
 
     @Override
@@ -45,6 +46,7 @@ public class MainFt1Activity extends AppCompatActivity {
         ImageView icon = (ImageView) findViewById(R.id.icon);
         RequestQueue queue = Volley.newRequestQueue(this);
         TextView fecha = (TextView) findViewById(R.id.Fecha);
+        txCity = (TextView) findViewById(R.id.nombreCiudad_ft1);
         dbHelper = new WeatherDatabaseHelper(this);
         handler = new NotificationHandler(this);
 
@@ -61,10 +63,14 @@ public class MainFt1Activity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     Double temperature = response.getJSONObject("current").getDouble("temp_c");
-                                    temperatura.setText("Temperatura actual: " + temperature + " ºC");
+                                    temperatura.setText(temperature + " ºC");
                                     Picasso.get().load("http:".concat(response.getJSONObject("current").getJSONObject("condition").getString("icon"))).into(icon);
                                     String date = response.getJSONObject("current").getString("last_updated");
                                     fecha.setText("Medición " + date);
+                                    temperatura.setVisibility(View.VISIBLE);
+                                    fecha.setVisibility(View.VISIBLE);
+                                    icon.setVisibility(View.VISIBLE);
+                                    txCity.setText(city.getText().toString());
                                     int air_quality = response.getJSONObject("current").getJSONObject("air_quality").getInt("us-epa-index");
                                     if(air_quality >= 3) {
                                         //alerta de calidad de aire -- se lanza notificacion

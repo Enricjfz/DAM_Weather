@@ -18,18 +18,15 @@
         app:layout_constraintVertical_bias="0.256"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <Button
-        android:id="@+id/button_f2_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="75dp"
-        android:text="@string/comp_pred"
+    <ImageView
+        android:id="@+id/imageView_ft3_extended"
+        android:layout_width="41dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="192dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srcCompat="?attr/actionModeShareDrawable" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

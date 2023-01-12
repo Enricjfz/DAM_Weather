@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button b1 = (Button) findViewById(R.id.button_ft1);
         Button b2 = (Button) findViewById(R.id.button_ft2);
+        Button b3 = (Button) findViewById(R.id.button_ft3);
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent ft2 = new Intent(MainActivity.this, MainFt2Activity.class);
                 MainActivity.this.startActivity(ft2);
+            }
+        });
+
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ft3 = new Intent(MainActivity.this,MainFt3Activity.class);
+                MainActivity.this.startActivity(ft3);
             }
         });
 

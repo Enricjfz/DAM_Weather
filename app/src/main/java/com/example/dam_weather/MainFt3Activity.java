@@ -9,6 +9,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.net.HttpURLConnection;
 
 public class MainFt3Activity extends AppCompatActivity implements SensorEventListener {
 
@@ -16,7 +21,9 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
     private TextView temp;
     private TextView hum;
     private Sensor tempSensor;
+    private Sensor humSensor;
     private boolean isTempAvailable;
+    private boolean isHumAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
 
 
         temp = (TextView) findViewById(R.id.temp_ft3);
+        hum = (TextView) findViewById(R.id.hum_ft3);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
             tempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
@@ -32,14 +40,30 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
         }
         else {
             //no hay sensor de temperatura -- mensaje al usuario
+            Toast.makeText(this, "No hay sensor de Temperatura en el Movil", Toast.LENGTH_SHORT).show();
             isTempAvailable = false;
         }
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null) {
+            humSensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
+            isHumAvailable = true;
+        }
+        else {
+            //no hay sensor de humedad -- mensaje al usuario
+            Toast.makeText(this, "No hay sensor de Humedad en el Movil", Toast.LENGTH_SHORT).show();
+            isHumAvailable = false;
+        }
+
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            temp.setText(sensorEvent.values[0] + " ºC");
+        }
 
-        temp.setText(sensorEvent.values[0] + " ºC");
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY) {
+            hum.setText(sensorEvent.values[0] + " %");
+        }
 
     }
 
@@ -59,13 +83,17 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
         if(isTempAvailable) {
             sensorManager.registerListener(this,tempSensor,SensorManager.SENSOR_DELAY_NORMAL);
         }
+        if(isHumAvailable) {
+            sensorManager.registerListener(this,humSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
 
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        if(isTempAvailable) {
+        if(isTempAvailable || isHumAvailable) {
             sensorManager.unregisterListener(this);
         }
     }

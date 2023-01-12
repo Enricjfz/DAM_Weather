@@ -21,7 +21,7 @@ public class MainActivityFt2_extended extends AppCompatActivity {
     private TextView tPrep;
     private TextView tVelMax;
     private ImageView tIcon;
-    private Button bComp;
+    private ImageView share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivityFt2_extended extends AppCompatActivity {
         tPrep = (TextView) findViewById(R.id.prep_ft2_extended);
         tVelMax = (TextView) findViewById(R.id.vel_viento_ft2_extended);
         tIcon = (ImageView) findViewById(R.id.icon_ft2_extended);
-        bComp = (Button) findViewById(R.id.button_f2_share);
+        share = (ImageView) findViewById(R.id.imageView_ft3_extended);
 
         String date = extras.getString("date");
         String t_max = extras.getString("temp_max");
@@ -50,7 +50,7 @@ public class MainActivityFt2_extended extends AppCompatActivity {
         tPrep.setText(prep + " mm");
         tVelMax.setText(vel_wind + " kph");
 
-        bComp.setOnClickListener(new View.OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String prediccion = "La prediccion del tiempo del dia " + date + " es la siguiente: " +
@@ -63,11 +63,8 @@ public class MainActivityFt2_extended extends AppCompatActivity {
                 intentSender.putExtra(Intent.EXTRA_TEXT,prediccion);
                 Intent shareIntent = Intent.createChooser(intentSender, "Envia la prediccion...");
                 startActivity(shareIntent);
-
             }
         });
-
-
 
     }
 }

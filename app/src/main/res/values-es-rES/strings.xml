@@ -5,6 +5,10 @@
     <string name="temp_actual">Temperatura Actual</string>
     <string name="prediccion">Predicción</string>
     <string name="comp_pred">Compartir Predicción</string>
+    <string name="sensores">Sensores</string>
+    <string name="temperatura">Temperatura</string>
+    <string name="humedad">Humedad</string>
+
 
 
 

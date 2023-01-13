@@ -36,6 +36,7 @@ public class MainFt2Activity extends AppCompatActivity {
     private ArrayList<ModelFt2> weatherModelList;
     private RecyclerView lista;
     private TextView ciudad;
+    private TextView text_pred;
 
 
     @Override
@@ -50,6 +51,7 @@ public class MainFt2Activity extends AppCompatActivity {
         adapter = new Ft2Adapter(this,weatherModelList);
         lista.setAdapter(adapter);
         ciudad =  (TextView) findViewById(R.id.editTextCiudadFt2);
+        text_pred = (TextView) findViewById(R.id.textView_ft2);
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
@@ -97,6 +99,8 @@ public class MainFt2Activity extends AppCompatActivity {
                                         weatherModelList.add(new ModelFt2(fecha,max_temp,min_temp,precip,vel_temp,icon));
                                     }
                                     adapter.notifyDataSetChanged();
+                                    text_pred.setVisibility(View.VISIBLE);
+                                    text_pred.setText("La predicción a 3 dias de la población " + ciudad.getText().toString());
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();

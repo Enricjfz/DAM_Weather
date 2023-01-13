@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Enrique/AndroidStudioProjects/DAM_Weather/app/src/main/res/drawable/button_bg.xml" value="0.1785" />
+        <entry key="..\:/Users/Enrique/AndroidStudioProjects/DAM_Weather/app/src/main/res/drawable/layer_bg.xml" value="0.1785" />
         <entry key="..\:/Users/Enrique/AndroidStudioProjects/DAM_Weather/app/src/main/res/layout/activity_custom_list_view_ft2.xml" value="0.22" />
         <entry key="..\:/Users/Enrique/AndroidStudioProjects/DAM_Weather/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/Enrique/AndroidStudioProjects/DAM_Weather/app/src/main/res/layout/activity_main_ft1.xml" value="0.22" />

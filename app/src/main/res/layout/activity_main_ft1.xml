@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C9EDE5"
     tools:context=".MainFt1Activity">
 
     <EditText
@@ -17,6 +18,7 @@
         android:hint="Ciudad: "
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -45,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:text="TextView"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="invisible" />
 
@@ -65,6 +68,7 @@
         android:layout_width="139dp"
         android:layout_height="75dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/icon"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout3" />

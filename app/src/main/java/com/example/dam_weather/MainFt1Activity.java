@@ -87,18 +87,23 @@ public class MainFt1Activity extends AppCompatActivity {
                                         handler.getManager().notify(1,nBuilder.build());
 
                                     }
-                                    //ModelWeather p = new ModelWeather(city.getText().toString(),response.getJSONObject("current").getJSONObject("condition").getString("icon"),temperature,date);
+                                    ModelWeather p = new ModelWeather(city.getText().toString(),response.getJSONObject("current").getJSONObject("condition").getString("icon"),temperature,date);
                                     //añadir datos a  la db
-                                    /*
+
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
                                             if(!WeatherDB.existsRow(dbHelper,p.getName_city())) {
+                                                //no existe entrada se crea una nueva
                                                 WeatherDB.save(dbHelper, p);
+                                            }
+                                            else{
+                                                //se actualiza la entrada
+                                                WeatherDB.updateRow(dbHelper,p);
                                             }
                                         }
                                     }).start();
-                                   */
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -110,6 +115,26 @@ public class MainFt1Activity extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 Log.e("connection","error");
                                 Log.e("connection_error","" + error.networkResponse.statusCode);
+                                //se intenta ver si existe una version anterior de la ciudad en memoria
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(WeatherDB.existsRow(dbHelper,city.getText().toString())) {
+                                            //no existe entrada se crea una nueva
+                                           ModelWeather p = WeatherDB.getWeather(dbHelper,city.getText().toString());
+                                           if(p != null) {
+                                               //double check
+                                               temperatura.setText(p.getTemperature() + " ºC");
+                                               Picasso.get().load("http:".concat(p.getIcon_path())).into(icon);
+                                               fecha.setText("Medición " + p.getDate());
+                                               temperatura.setVisibility(View.VISIBLE);
+                                               fecha.setVisibility(View.VISIBLE);
+                                               icon.setVisibility(View.VISIBLE);
+                                               txCity.setText(city.getText().toString());
+                                           }
+                                        }
+                                    }
+                                }).start();
 
                             }
                         });

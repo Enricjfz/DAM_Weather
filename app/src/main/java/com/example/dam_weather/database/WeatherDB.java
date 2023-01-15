@@ -9,8 +9,8 @@ public class WeatherDB {
     //operations with the DB
     public static void save(WeatherDatabaseHelper dbHelper, ModelWeather p){
         SQLiteDatabase conn = dbHelper.getWritableDatabase();
-        conn.execSQL("INSERT INTO weather VALUES ('"+ p.getName_city()+"'," +
-                p.getTemperature() + ", " + ", " + p.getDate() + ", " + p.getIcon_path() +")");
+        conn.execSQL("INSERT INTO weather VALUES ('"+ p.getName_city()+ "', " +
+                p.getTemperature() + ", '" + p.getDate() + "', '" + p.getIcon_path() +"')");
     }
 
     public static ModelWeather getWeather(WeatherDatabaseHelper dbHelper, String city){
@@ -41,8 +41,8 @@ public class WeatherDB {
 
     public static void updateRow(WeatherDatabaseHelper dbHelper, ModelWeather p ) {
         SQLiteDatabase conn = dbHelper.getWritableDatabase();
-        conn.execSQL("UPDATE weather SET temperatura=" + p.getTemperature() + ", " + "fecha=" + p.getDate() + ", " + "icon_path=" + p.getIcon_path() +
-                "WHERE nombre_ciudad=" + p.getName_city() + ";");
+        conn.execSQL("UPDATE weather SET temperatura=" + p.getTemperature() + ", " + "fecha='" + p.getDate() + "', " + "icon_path='" + p.getIcon_path() +
+                "' WHERE nombre_ciudad='" + p.getName_city() + "';");
 
     }
 }

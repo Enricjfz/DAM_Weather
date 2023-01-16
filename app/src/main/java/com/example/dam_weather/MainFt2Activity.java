@@ -28,7 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainFt2Activity extends AppCompatActivity {
 
@@ -50,8 +53,8 @@ public class MainFt2Activity extends AppCompatActivity {
         weatherModelList = new ArrayList<>();
         adapter = new Ft2Adapter(this,weatherModelList);
         lista.setAdapter(adapter);
-        ciudad =  (TextView) findViewById(R.id.editTextCiudadFt2);
-        text_pred = (TextView) findViewById(R.id.textView_ft2);
+        ciudad =   findViewById(R.id.editTextCiudadFt2);
+        text_pred = findViewById(R.id.textView_ft2);
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
@@ -91,6 +94,14 @@ public class MainFt2Activity extends AppCompatActivity {
                                     for(int i = 0; i < lista_pred.length(); i++) {
                                         JSONObject dateObj = lista_pred.getJSONObject(i);
                                         String fecha = dateObj.getString("date");
+                                        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                        try {
+                                            Date dateOld = inputFormat.parse(fecha);
+                                            fecha = outputFormat.format(dateOld);
+                                        }catch(ParseException e) {
+                                            e.printStackTrace();
+                                        }
                                         String max_temp = dateObj.getJSONObject("day").getString("maxtemp_c");
                                         String min_temp = dateObj.getJSONObject("day").getString("mintemp_c");
                                         String vel_temp = dateObj.getJSONObject("day").getString("maxwind_kph");

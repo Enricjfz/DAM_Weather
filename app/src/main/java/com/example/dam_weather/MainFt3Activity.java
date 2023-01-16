@@ -11,9 +11,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
-import java.net.HttpURLConnection;
 
 public class MainFt3Activity extends AppCompatActivity implements SensorEventListener {
 
@@ -31,8 +29,8 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.activity_main_ft3);
 
 
-        temp = (TextView) findViewById(R.id.temp_ft3);
-        hum = (TextView) findViewById(R.id.hum_ft3);
+        temp = findViewById(R.id.temp_ft3);
+        hum =  findViewById(R.id.hum_ft3);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
             tempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
@@ -42,6 +40,7 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
             //no hay sensor de temperatura -- mensaje al usuario
             Toast.makeText(this, "No hay sensor de Temperatura en el Movil", Toast.LENGTH_SHORT).show();
             isTempAvailable = false;
+            temp.setText("N/A");
         }
         if(sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null) {
             humSensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
@@ -51,6 +50,7 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
             //no hay sensor de humedad -- mensaje al usuario
             Toast.makeText(this, "No hay sensor de Humedad en el Movil", Toast.LENGTH_SHORT).show();
             isHumAvailable = false;
+            hum.setText("N/A");
         }
 
     }

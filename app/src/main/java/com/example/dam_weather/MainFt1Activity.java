@@ -6,7 +6,6 @@ import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.textclassifier.TextLinks;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,12 +21,15 @@ import com.example.dam_weather.models.ModelWeather;
 import com.example.dam_weather.notifications.NotificationHandler;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.net.URL;
+
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainFt1Activity extends AppCompatActivity {
@@ -41,12 +43,12 @@ public class MainFt1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_ft1);
-        TextView city = (TextView) findViewById(R.id.editTextCity);
-        TextView temperatura = (TextView) findViewById(R.id.idTemperatura);
-        ImageView icon = (ImageView) findViewById(R.id.icon);
+        TextView city = findViewById(R.id.editTextCity);
+        TextView temperatura =  findViewById(R.id.idTemperatura);
+        ImageView icon =  findViewById(R.id.icon);
         RequestQueue queue = Volley.newRequestQueue(this);
-        TextView fecha = (TextView) findViewById(R.id.Fecha);
-        txCity = (TextView) findViewById(R.id.nombreCiudad_ft1);
+        TextView fecha =  findViewById(R.id.Fecha);
+        txCity =  findViewById(R.id.nombreCiudad_ft1);
         dbHelper = new WeatherDatabaseHelper(this);
         handler = new NotificationHandler(this);
 
@@ -66,6 +68,14 @@ public class MainFt1Activity extends AppCompatActivity {
                                     temperatura.setText(temperature + " ºC");
                                     Picasso.get().load("http:".concat(response.getJSONObject("current").getJSONObject("condition").getString("icon"))).into(icon);
                                     String date = response.getJSONObject("current").getString("last_updated");
+                                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    try {
+                                        Date dateOld = inputFormat.parse(date);
+                                        date = outputFormat.format(dateOld);
+                                    }catch(ParseException e) {
+                                        e.printStackTrace();
+                                    }
                                     fecha.setText("Medición " + date);
                                     temperatura.setVisibility(View.VISIBLE);
                                     fecha.setVisibility(View.VISIBLE);

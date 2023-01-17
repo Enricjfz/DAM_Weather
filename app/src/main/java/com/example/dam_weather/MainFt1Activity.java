@@ -126,6 +126,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                 Log.e("connection","error");
                                 Log.e("connection_error","" + error.networkResponse.statusCode);
                                 //se intenta ver si existe una version anterior de la ciudad en memoria
+
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -135,7 +136,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                            if(p != null) {
                                                //double check
                                                temperatura.setText(p.getTemperature() + " ºC");
-                                               Picasso.get().load("http:".concat(p.getIcon_path())).into(icon);
+                                               //Picasso.get().load("http:".concat(p.getIcon_path())).into(icon); -->excepcion
                                                fecha.setText("Medición " + p.getDate());
                                                temperatura.setVisibility(View.VISIBLE);
                                                fecha.setVisibility(View.VISIBLE);

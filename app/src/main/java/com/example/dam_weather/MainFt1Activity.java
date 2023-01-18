@@ -19,6 +19,7 @@ import com.example.dam_weather.database.WeatherDB;
 import com.example.dam_weather.database.WeatherDatabaseHelper;
 import com.example.dam_weather.models.ModelWeather;
 import com.example.dam_weather.notifications.NotificationHandler;
+import com.example.dam_weather.threads.MyThread;
 import com.squareup.picasso.Picasso;
 
 
@@ -30,6 +31,11 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class MainFt1Activity extends AppCompatActivity {
@@ -56,6 +62,11 @@ public class MainFt1Activity extends AppCompatActivity {
         city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(city.getText().toString().matches("")) {
+                    //Toast.makeText(MainFt1Activity.this,"No has insertado texto",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 String url = "https://api.weatherapi.com/v1/forecast.json?key=6da5c2e18536409fb4d162040230101&q=" + city.getText().toString() + "&aqi=yes";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -114,6 +125,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                         }
                                     }).start();
 
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -126,6 +138,35 @@ public class MainFt1Activity extends AppCompatActivity {
                                 Log.e("connection","error");
                                 Log.e("connection_error","" + error.networkResponse.statusCode);
                                 //se intenta ver si existe una version anterior de la ciudad en memoria
+
+                                // Crear un ExecutorService
+                                ExecutorService executor = Executors.newSingleThreadExecutor();
+
+                                // Crear una instancia de Callable
+                                Callable<ModelWeather> callable = new MyThread(dbHelper,city.getText().toString());
+
+                                // Enviar el Callable al ExecutorService
+                                Future<ModelWeather> future = executor.submit(callable);
+
+
+                                try {
+                                    ModelWeather p = future.get();
+                                    if(p != null) {
+                                        //double check
+                                        temperatura.setText(p.getTemperature() + " ºC");
+                                        Picasso.get().load("http:".concat(p.getIcon_path())).into(icon); //-->excepcion
+                                        fecha.setText("Medición " + p.getDate());
+                                        temperatura.setVisibility(View.VISIBLE);
+                                        fecha.setVisibility(View.VISIBLE);
+                                        icon.setVisibility(View.VISIBLE);
+                                        txCity.setText(city.getText().toString());
+                                    }
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                }
+                                /*
 
                                 new Thread(new Runnable() {
                                     @Override
@@ -147,8 +188,12 @@ public class MainFt1Activity extends AppCompatActivity {
                                     }
                                 }).start();
 
+                                 */
+
                             }
                         });
+
+
                 queue.add(jsonObjectRequest);
             }
         });

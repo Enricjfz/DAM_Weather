@@ -81,6 +81,11 @@ public class MainFt2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(ciudad.getText().toString().matches("")) {
+                    //Toast.makeText(MainFt1Activity.this,"No has insertado texto",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String url = "https://api.weatherapi.com/v1/forecast.json?key=6da5c2e18536409fb4d162040230101&q=" + ciudad.getText().toString() + "&days=7&aqi=no&alerts=no";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                         (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

@@ -45,7 +45,7 @@ public class Ft2Adapter extends RecyclerView.Adapter<Ft2Adapter.ViewHolder> impl
         holder.fecha.setText(model.getFecha()); //Se puede formatear la fecha
         holder.prep.setText(model.getPrecipitaciones() + " mm");
         holder.maxwind_kph.setText(model.getMaxwind_kph() + " kph");
-        Picasso.get().load("http:".concat(model.getIcon_path())).into(holder.icon);
+        Picasso.get().load("https:".concat(model.getIcon_path())).into(holder.icon);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {

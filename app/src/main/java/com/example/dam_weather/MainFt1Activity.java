@@ -77,7 +77,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                 try {
                                     Double temperature = response.getJSONObject("current").getDouble("temp_c");
                                     temperatura.setText(temperature + " ºC");
-                                    Picasso.get().load("http:".concat(response.getJSONObject("current").getJSONObject("condition").getString("icon"))).into(icon);
+                                    Picasso.get().load("https:".concat(response.getJSONObject("current").getJSONObject("condition").getString("icon"))).into(icon);
                                     String date = response.getJSONObject("current").getString("last_updated");
                                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                                     SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -154,7 +154,7 @@ public class MainFt1Activity extends AppCompatActivity {
                                     if(p != null) {
                                         //double check
                                         temperatura.setText(p.getTemperature() + " ºC");
-                                        Picasso.get().load("http:".concat(p.getIcon_path())).into(icon); //-->excepcion
+                                        Picasso.get().load("https:".concat(p.getIcon_path())).into(icon); //-->excepcion
                                         fecha.setText("Medición " + p.getDate());
                                         temperatura.setVisibility(View.VISIBLE);
                                         fecha.setVisibility(View.VISIBLE);

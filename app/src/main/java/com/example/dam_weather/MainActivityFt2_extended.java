@@ -43,7 +43,7 @@ public class MainActivityFt2_extended extends AppCompatActivity {
         String vel_wind = extras.getString("vel_max");
         String icon_path = extras.getString("icon_path");
 
-        Picasso.get().load("http:".concat(icon_path)).into(tIcon);
+        Picasso.get().load("https:".concat(icon_path)).into(tIcon);
         tDate.setText(date);
         tTempMax.setText(t_max + " º C");
         tTempMin.setText(t_min + " º C");

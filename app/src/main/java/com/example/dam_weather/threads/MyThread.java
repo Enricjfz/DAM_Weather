@@ -18,7 +18,7 @@ public class MyThread implements Callable<ModelWeather> {
       this.city = city;
     }
 
-    //check if the raw exits and gets it otherwise returns a null object
+    //check if the raw exits and gets it, otherwise returns a null object
     @Override
     public ModelWeather call() throws Exception {
         ModelWeather p = null;

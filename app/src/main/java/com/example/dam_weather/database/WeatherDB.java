@@ -7,12 +7,15 @@ import com.example.dam_weather.models.ModelWeather;
 
 public class WeatherDB {
     //operations with the DB
+
+    //guardar una medicion en la BD
     public static void save(WeatherDatabaseHelper dbHelper, ModelWeather p){
         SQLiteDatabase conn = dbHelper.getWritableDatabase();
         conn.execSQL("INSERT INTO weather VALUES ('"+ p.getName_city()+ "', " +
                 p.getTemperature() + ", '" + p.getDate() + "', '" + p.getIcon_path() +"')");
     }
 
+    //obtener una fila de la bd, devuelve null si no existe esa fila
     public static ModelWeather getWeather(WeatherDatabaseHelper dbHelper, String city){
         String  [] arg = {city};
         SQLiteDatabase dbConnection = dbHelper.getReadableDatabase();
@@ -26,6 +29,7 @@ public class WeatherDB {
         return p;
     }
 
+    //true si existe una fila, false en caso contrario
     public static boolean existsRow(WeatherDatabaseHelper dbHelper, String city) {
         boolean exits = false;
         String  [] arg = {city};
@@ -39,6 +43,7 @@ public class WeatherDB {
 
     }
 
+    //actualiza una fila de la bd con nuevos valores
     public static void updateRow(WeatherDatabaseHelper dbHelper, ModelWeather p ) {
         SQLiteDatabase conn = dbHelper.getWritableDatabase();
         conn.execSQL("UPDATE weather SET temperatura=" + p.getTemperature() + ", " + "fecha='" + p.getDate() + "', " + "icon_path='" + p.getIcon_path() +

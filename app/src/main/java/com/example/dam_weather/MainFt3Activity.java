@@ -55,6 +55,7 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
 
     }
 
+    //actualización de UI con nuevos datos
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(sensorEvent.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
@@ -77,6 +78,7 @@ public class MainFt3Activity extends AppCompatActivity implements SensorEventLis
         super.onPointerCaptureChanged(hasCapture);
     }
 
+    //eliminar el registro de sensores
     @Override
     protected void onResume() {
         super.onResume();

@@ -13,6 +13,8 @@ import com.example.dam_weather.R;
 
 public class NotificationHandler extends ContextWrapper {
 
+    //Codigo usado en clase
+
     private NotificationManager manager;
     public static final String CHANNEL_HIGH_ID = "1";
     public static final String CHANNEL_LOW_ID = "2";

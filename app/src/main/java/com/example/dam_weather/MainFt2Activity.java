@@ -80,7 +80,7 @@ public class MainFt2Activity extends AppCompatActivity {
         ciudad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //editText vacio
                 if(ciudad.getText().toString().matches("")) {
                     //Toast.makeText(MainFt1Activity.this,"No has insertado texto",Toast.LENGTH_SHORT).show();
                     return;

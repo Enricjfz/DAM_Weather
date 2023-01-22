@@ -50,6 +50,7 @@ public class MainActivityFt2_extended extends AppCompatActivity {
         tPrep.setText(prep + " mm");
         tVelMax.setText(vel_wind + " kph");
 
+        //enviar predicción
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

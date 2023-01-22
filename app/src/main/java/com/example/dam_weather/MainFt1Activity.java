@@ -62,7 +62,7 @@ public class MainFt1Activity extends AppCompatActivity {
         city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //editText Vacio
                 if(city.getText().toString().matches("")) {
                     //Toast.makeText(MainFt1Activity.this,"No has insertado texto",Toast.LENGTH_SHORT).show();
                     return;
@@ -137,7 +137,8 @@ public class MainFt1Activity extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 Log.e("connection","error");
                                 Log.e("connection_error","" + error.networkResponse.statusCode);
-                                //se intenta ver si existe una version anterior de la ciudad en memoria
+                                //se intenta ver si existe una version anterior de la ciudad en memoria y en caso afirmativo se
+                                //le muestra al usuario
 
                                 // Crear un ExecutorService
                                 ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -166,29 +167,6 @@ public class MainFt1Activity extends AppCompatActivity {
                                 }catch (ExecutionException e) {
                                     e.printStackTrace();
                                 }
-                                /*
-
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if(WeatherDB.existsRow(dbHelper,city.getText().toString())) {
-                                            //no existe entrada se crea una nueva
-                                           ModelWeather p = WeatherDB.getWeather(dbHelper,city.getText().toString());
-                                           if(p != null) {
-                                               //double check
-                                               temperatura.setText(p.getTemperature() + " ºC");
-                                               //Picasso.get().load("http:".concat(p.getIcon_path())).into(icon); -->excepcion
-                                               fecha.setText("Medición " + p.getDate());
-                                               temperatura.setVisibility(View.VISIBLE);
-                                               fecha.setVisibility(View.VISIBLE);
-                                               icon.setVisibility(View.VISIBLE);
-                                               txCity.setText(city.getText().toString());
-                                           }
-                                        }
-                                    }
-                                }).start();
-
-                                 */
 
                             }
                         });
